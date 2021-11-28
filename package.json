@@ -21,9 +21,10 @@
     "build": "react-scripts build",
     "watch": "",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "lint": "prettier ./src && eslint ./src --ext .js,.jsx,.ts,.tsx",
-    "lint:fix": "prettier --write ./src && eslint ./src --ext .js,.jsx,.ts,.tsx --fix"
+    "prettier": "prettier --check 'src/**/*.{js,jsx,ts,tsx}'",
+    "eslint": "eslint ./src --ext .js,.jsx,.ts,.tsx",
+    "lint": "run-s prettier eslint",
+    "lint:fix": "run-s prettier -- --write eslint -- --fix"
   },
   "eslintConfig": {
     "extends": [
@@ -32,7 +33,12 @@
       "plugin:@typescript-eslint/recommended",
       "plugin:react/recommended",
       "prettier"
-    ]
+    ],
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    }
   },
   "browserslist": {
     "production": [
@@ -54,6 +60,7 @@
     "eslint-plugin-react": "^7.27.1",
     "husky": "^7.0.4",
     "lint-staged": "^12.1.2",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.5.0",
     "webpack": "^5.64.4",
     "webpack-cli": "^4.9.1"
