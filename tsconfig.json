@@ -12,9 +12,9 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx"
-  },
-  "include": ["src"]
+    "noEmitOnError": true,
+    "removeComments": true,
+    "outDir": "dist",
+    "typeRoots": ["node_modules/@types"]
+  }
 }
