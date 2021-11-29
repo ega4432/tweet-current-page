@@ -1,0 +1,73 @@
+import { Position } from "./types/window"
+
+let prevUrl = ""
+let tweetWindowId: number | undefined
+const targetUrl = "https://twitter.com/"
+
+const getCurrentWindow = (tab: chrome.tabs.Tab) => {
+  chrome.windows.getCurrent((current: chrome.windows.Window) => {
+    const text = `${tab.title ? encodeURIComponent(tab.title) : ""} ${
+      tab.url ? encodeURIComponent(tab.url) : ""
+    }`
+    const position = {
+      left: current.width ? (current.width - 500) / 2 : 0,
+      top: current.height ? (current.height - 375) / 2 : 0
+    }
+
+    openWindow(text, position)
+  })
+}
+
+const openWindow = (query: string, position: Position) => {
+  const createData: chrome.windows.CreateData = {
+    focused: true,
+    left: position.left,
+    top: position.top,
+    height: 375,
+    width: 500,
+    type: "popup",
+    url: `${targetUrl}intent/tweet?text=${query}`
+  }
+
+  chrome.windows.create(
+    createData,
+    (window: chrome.windows.Window | undefined) => {
+      tweetWindowId = window?.id
+    }
+  )
+}
+
+// 拡張機能ボタンを押した際
+chrome.action.onClicked.addListener((tab: chrome.tabs.Tab) => {
+  getCurrentWindow(tab)
+})
+
+// タブに更新があった際
+chrome.tabs.onUpdated.addListener(
+  (
+    tabId: number,
+    changeInfo: chrome.tabs.TabChangeInfo,
+    tab: chrome.tabs.Tab
+  ) => {
+    if (tab.url && changeInfo.status === "complete") {
+      if (
+        prevUrl &&
+        ~tab.url.indexOf(targetUrl) &&
+        prevUrl.indexOf(`${targetUrl}intent/tweet`) === 0
+      ) {
+        chrome.tabs.remove(tabId)
+      }
+      prevUrl = tab.url
+    }
+  }
+)
+
+// タブを削除した際
+chrome.tabs.onRemoved.addListener(
+  (tabId: number, removeInfo: chrome.tabs.TabRemoveInfo) => {
+    // Note: ツイートウィンドウを開いてツイートせずに閉じた場合バグるため
+    if (removeInfo.windowId === tweetWindowId) {
+      prevUrl = ""
+    }
+  }
+)
