@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Tweet Current Page",
-  "description": "The simple chrome extension that allows you to tweet the site you are currently viewing.",
+  "description": "現在表示しているサイトをツイートできるシンプルな Chrome 拡張機能。",
   "version": "0.1.0",
   "icons": {
     "16": "icon_16.png",
@@ -13,5 +13,5 @@
     "service_worker": "background.js"
   },
   "content_scripts": [],
-  "permissions": ["tabs", "activeTab"]
+  "permissions": ["tabs"]
 }
