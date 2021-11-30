@@ -10,8 +10,8 @@ const getCurrentWindow = (tab: chrome.tabs.Tab) => {
       tab.url ? encodeURIComponent(tab.url) : ""
     }`
     const position = {
-      left: current.width ? (current.width - 500) / 2 : 0,
-      top: current.height ? (current.height - 375) / 2 : 0
+      left: current.width ? Math.floor((current.width - 500) / 2) : 0,
+      top: current.height ? Math.floor((current.height - 375) / 2) : 0
     }
 
     openWindow(text, position)
