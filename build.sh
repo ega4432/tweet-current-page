@@ -1,6 +1,8 @@
 #!/bin/sh
+rm -rf ./dist
+yarn build
 
 cd ./dist
 zip -r build.zip ./
 
-cd ../ && mv ./dist/build.zip ./
+mv ./build.zip ../
