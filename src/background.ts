@@ -1,5 +1,3 @@
-import { Position } from "./types/window"
-
 let prevUrl = ""
 let tweetWindowId: number | undefined
 const targetUrl = "https://twitter.com/"
@@ -9,20 +7,20 @@ const getCurrentWindow = (tab: chrome.tabs.Tab) => {
     const text = `${tab.title ? encodeURIComponent(tab.title) : ""} ${
       tab.url ? encodeURIComponent(tab.url) : ""
     }`
-    const position = {
-      left: current.width ? Math.floor((current.width - 500) / 2) : 0,
-      top: current.height ? Math.floor((current.height - 375) / 2) : 0
-    }
 
-    openWindow(text, position)
+    openWindow(
+      text,
+      current.width ? Math.floor((current.width - 500) / 2) : 0,
+      current.height ? Math.floor((current.height - 375) / 2) : 0
+    )
   })
 }
 
-const openWindow = (query: string, position: Position) => {
+const openWindow = (query: string, left: number, top: number) => {
   const createData: chrome.windows.CreateData = {
     focused: true,
-    left: position.left,
-    top: position.top,
+    left,
+    top,
     height: 375,
     width: 500,
     type: "popup",
