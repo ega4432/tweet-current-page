@@ -7,7 +7,7 @@
 
 現在表示しているサイトをツイートできるシンプルな Chrome 拡張機能です。
 
-![Git](https://user-images.githubusercontent.com/38056766/144696201-5c5aaa55-3845-4b0a-95bc-4f191b122523.mov)
+![demo](https://user-images.githubusercontent.com/38056766/144696879-6f4b5c68-4f00-42bb-8b9d-7437bffb8284.gif)
 
 ## インストール
 
