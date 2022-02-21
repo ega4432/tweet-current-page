@@ -13,5 +13,18 @@
     "service_worker": "background.js"
   },
   "content_scripts": [],
-  "permissions": ["tabs"]
+  "permissions": ["tabs"],
+  "commands": {
+    "tweet": {
+      "description": "Tweet current page from shortcut.",
+      "global": false,
+      "suggested_key": {
+        "default": "Ctrl+Shift+Y",
+        "windows": "Ctrl+Shift+Y",
+        "mac": "Command+Shift+Y",
+        "linux": "Ctrl+Shift+Y",
+        "chromeos": "Ctrl+Shift+Y"
+      }
+    }
+  }
 }
