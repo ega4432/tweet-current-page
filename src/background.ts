@@ -69,3 +69,13 @@ chrome.tabs.onRemoved.addListener(
     }
   }
 )
+
+// ショートカットキーを押した際
+chrome.commands.onCommand.addListener(
+  (command: string, tab: chrome.tabs.Tab) => {
+    console.log(command)
+    if (command === "tweet") {
+      getCurrentWindow(tab)
+    }
+  }
+)
