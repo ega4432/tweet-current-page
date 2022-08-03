@@ -26,6 +26,3 @@ yarn-debug.log*
 yarn-error.log*
 
 tmp/
-
-# Tmp
-./deploy.sh
