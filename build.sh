@@ -2,7 +2,10 @@
 
 cd "$(dirname "$0")"
 
-rm -rf ./dist
+if [ -d ./dist ]; then
+    rm -rf ./dist
+fi
+
 yarn build
 
 cd ./dist
