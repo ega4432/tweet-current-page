@@ -20,14 +20,31 @@ Chrome web store からインストールできます。
 ## 開発
 
 ```sh
-% git clone git@github.com:ega4432/tweet-current-page.git
+# Git clone
+$ git clone git@github.com:ega4432/tweet-current-page.git
 
-% yarn
+# 依存パッケージのインストール
+$ yarn
 
-% yarn build
-# OR
-% yarn watch
+# ビルド
+$ yarn build
 ```
+
+## デプロイ
+
+GitHub にタグをプッシュすると自動で[デプロイが走ります](https://github.com/ega4432/tweet-current-page/actions/workflows/release.yaml)。
+
+```shell
+$ git tag -a 'v*.*.*' -m 'something'
+
+$ git push origin v*.*.*
+```
+
+[Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole) を確認して、デプロイが完了したかを確認します。
+
+## 作者
+
+ega4432: [GitHub](https://github.com/ega4432) / [Twitter](https://twitter.com/ega4432)
 
 ## ライセンス
 
