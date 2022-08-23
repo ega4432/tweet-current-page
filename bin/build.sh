@@ -1,6 +1,6 @@
 #!/bin/bash -eu
 
-cd "$(dirname "$0")/dist"
+cd "$(dirname "$0")/../dist"
 
 if [[ -e ../extension.zip ]]; then
     cd ../

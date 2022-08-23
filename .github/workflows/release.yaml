@@ -69,13 +69,13 @@ jobs:
         run: |
           echo "target version is: ${{ steps.variables.outputs.VERSION }}"
 
-          jq '.version="${{ steps.variables.outputs.VERSION }}"' ./public/manifest.json > tmp.json
-          mv tmp.json ./public/manifest.json
+          jq '.version="${{ steps.variables.outputs.VERSION }}"' ./dist/manifest.json > tmp.json
+          mv tmp.json ./dist/manifest.json
 
-          cat ./public/manifest.json
+          cat ./dist/manifest.json
 
       - name: Zip distributing package
-        run: ./build.sh
+        run: ./bin/build.sh
 
       - name: Upload
         # Ref: https://github.com/fregante/chrome-webstore-upload-cli

@@ -1,6 +1,6 @@
 #!/bin/bash -eu
 
-cd "$(dirname "$0")"
+cd "$(dirname "$0")/.."
 
 if ! type act; then
     echo "\"act\" command is not found."
