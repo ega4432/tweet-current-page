@@ -54,7 +54,7 @@ jobs:
 
           TAG=''
           if [ "${{ github.event_name }}" = "push" ]; then
-            TAG="${GITHUB_REF#ref/tags/v}"
+            TAG="${GITHUB_REF#refs/tags/v}"
           elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             TAG="${{ github.event.inputs.tag }}"
           else
