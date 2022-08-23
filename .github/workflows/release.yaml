@@ -77,17 +77,22 @@ jobs:
       - name: Zip distributing package
         run: ./bin/build.sh
 
-      - name: Upload
+      - name: Upload and Publish
         # Ref: https://github.com/fregante/chrome-webstore-upload-cli
-        run: npx chrome-webstore-upload-cli@2 upload --source extension.zip
+        run: npx chrome-webstore-upload-cli@2 upload --source extension.zip --auto-publish
         env:
-          EXTENSION_ID: ${{ secrets.EXTENSION_ID }}
-          CLIENT_ID: ${{ secrets.CLIENT_ID }}
-          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
-          REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
+          EXTENSION_ID: "${{ secrets.EXTENSION_ID }}"
+          CLIENT_ID: "${{ secrets.CLIENT_ID }}"
+          CLIENT_SECRET: "${{ secrets.CLIENT_SECRET }}"
+          REFRESH_TOKEN: "${{ secrets.REFRESH_TOKEN }}"
 
-      # - name: Publish
-      #   run: npx chrome-webstore-upload publish --extension-id $EXTENSION_ID
-
-      # - name: Create release
-      #   uses: softprops/action-gh-release@v1
+      - name: Create new release
+        # Ref: https://github.com/marvinpinto/action-automatic-releases
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          title: "Release ${{ steps.variables.outputs.VERSION }}"
+          files: |
+            LICENSE
+            extension.zip
