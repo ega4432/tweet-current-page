@@ -1,0 +1,95 @@
+name: release
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+"
+
+  workflow_dispatch:
+    inputs:
+      tag:
+        required: true
+        type: string
+        description: 'GitHub tag version without "v" ( ex: *.*.* )'
+        default: ""
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup node
+        uses: actions/setup-node@v3 # https://github.com/actions/setup-node
+        with:
+          node-version-file: .node-version
+          cache: "yarn"
+
+      # example: https://github.com/actions/cache/blob/main/examples.md#node---yarn
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Cache dependencies
+        uses: actions/cache@v3 # https://github.com/actions/cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build
+        run: yarn build
+
+      - name: Get version from tag
+        id: variables
+        shell: bash
+        run: |
+          echo "github.event_name is: ${{ github.event_name }}"
+
+          TAG=''
+          if [ "${{ github.event_name }}" = "push" ]; then
+            TAG="${GITHUB_REF#ref/tags/v}"
+          elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            TAG="${{ github.event.inputs.tag }}"
+          else
+            echo "Invalid event type"
+            exit 1
+          fi
+
+          echo ::set-output name=VERSION::$TAG
+
+      - name: Update manifest.json
+        shell: bash
+        run: |
+          echo "target version is: ${{ steps.variables.outputs.VERSION }}"
+
+          jq '.version="${{ steps.variables.outputs.VERSION }}"' ./public/manifest.json > tmp.json
+          mv tmp.json ./public/manifest.json
+
+          cat ./public/manifest.json
+
+      - name: Zip distributing package
+        run: ./build.sh
+
+      - name: Upload
+        # Ref: https://github.com/fregante/chrome-webstore-upload-cli
+        run: npx chrome-webstore-upload@2 upload --source extension.zip
+        env:
+          EXTENSION_ID: ${{ secrets.EXTENSION_ID }}
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+          REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
+
+      # - name: Publish
+      #   run: npx chrome-webstore-upload publish --extension-id $EXTENSION_ID
+
+      # - name: Create release
+      #   uses: softprops/action-gh-release@v1

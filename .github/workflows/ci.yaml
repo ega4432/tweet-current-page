@@ -16,7 +16,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v3 # https://github.com/actions/setup-node
         with:
-          node-version: 16
+          node-version-file: .node-version
           cache: "yarn"
 
       # example: https://github.com/actions/cache/blob/main/examples.md#node---yarn

@@ -1,14 +1,12 @@
 #!/bin/bash -eu
 
-cd "$(dirname "$0")"
+cd "$(dirname "$0")/dist"
 
-if [ -d ./dist ]; then
-    rm -rf ./dist
+if [[ -e ../extension.zip ]]; then
+    cd ../
+    rm ./extension.zip
+    cd dist
 fi
 
-yarn build
-
-cd ./dist
-zip -r build.zip ./
-
-mv ./build.zip ../
+zip -r extension.zip ./
+mv ./extension.zip ../
