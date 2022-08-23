@@ -32,12 +32,37 @@ $ yarn build
 
 ## デプロイ
 
-GitHub にタグをプッシュすると自動で[デプロイが走ります](https://github.com/ega4432/tweet-current-page/actions/workflows/release.yaml)。
+### 通常のデプロイフロー
+
+事前に GitHub の Secret に秘匿情報を追加する必要があります。秘匿情報の生成については [こちら](https://github.com/fregante/chrome-webstore-upload/blob/main/How%20to%20generate%20Google%20API%20keys.md) を参考にしてください。
+
+GitHub にタグをプッシュすると自動で[デプロイが走ります](https://github.com/ega4432/tweet-current-page/actions/workflows/release.yaml)。この時打ったタグが Chrome Web Store のパッケージのバージョンになります。
 
 ```shell
 $ git tag -a 'v*.*.*' -m 'something'
 
 $ git push origin v*.*.*
+```
+
+### GitHub Actions をデバッグ
+
+GitHub Actions のワークフローをローカルでデバッグしたい場合は以下のように act を使用します。デフォルトでは `push` イベントをトリガにした場合の処理が実行されます。
+
+```shell
+$ brew install act
+
+$ ./bin/act.sh
+```
+
+### マニュアルデプロイ
+
+手動でデプロイしたい場合は、以下のようにローカルに .env を準備して行います。
+
+```shell
+# 生成した秘匿情報をペーストします
+$ cp .env.example .env
+
+$ ./bin/deploy.sh
 ```
 
 [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole) を確認して、デプロイが完了したかを確認します。
