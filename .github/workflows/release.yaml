@@ -7,10 +7,10 @@ on:
 
   workflow_dispatch:
     inputs:
-      tag:
+      version:
         required: true
         type: string
-        description: 'GitHub tag version without "v" ( ex: *.*.* )'
+        description: 'Deploy version without "v" ( ex: *.*.* )'
         default: ""
 
 jobs:
@@ -52,17 +52,17 @@ jobs:
         run: |
           echo "github.event_name is: ${{ github.event_name }}"
 
-          TAG=''
+          VERSION=''
           if [ "${{ github.event_name }}" = "push" ]; then
-            TAG="${GITHUB_REF#refs/tags/v}"
+            VERSION="${GITHUB_REF#refs/tags/v}"
           elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            TAG="${{ github.event.inputs.tag }}"
+            VERSION="${{ github.event.inputs.version }}"
           else
             echo "Invalid event type"
             exit 1
           fi
 
-          echo ::set-output name=VERSION::$TAG
+          echo ::set-output name=VERSION::$VERSION
 
       - name: Update manifest.json
         shell: bash
