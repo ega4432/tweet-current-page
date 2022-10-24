@@ -659,10 +659,10 @@
   dependencies:
     "@babel/types" "^7.3.0"
 
-"@types/chrome@^0.0.164":
-  version "0.0.164"
-  resolved "https://registry.yarnpkg.com/@types/chrome/-/chrome-0.0.164.tgz#0a7669cf7225df0c472c69f73ef4b7b1d2d94013"
-  integrity sha512-/EvjbfcowiA+f8Fwv5PSzxHhnAgjIx50Bjy1zQQYYwxlbJ+rI07CXMhrxwz4jUZlxLjnn/kugNQBjZIN58pKyg==
+"@types/chrome@^0.0.199":
+  version "0.0.199"
+  resolved "https://registry.yarnpkg.com/@types/chrome/-/chrome-0.0.199.tgz#fe4fdd2d90135fbaee24ef2490ea875ba502f818"
+  integrity sha512-BDuKiS8iZONsvTFSjbJlmHAwkYpkcWtG7Z7ESDJ/vf0QlcaXX6q4Xzi7euDNjIS4ZMA4kSODPGBHGVdC2lAHzw==
   dependencies:
     "@types/filesystem" "*"
     "@types/har-format" "*"
