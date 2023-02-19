@@ -10,6 +10,7 @@ jobs:
     timeout-minutes: 1
     permissions:
       pull-requests: write
+      contents: write
     if: ${{ github.event.pull_request.user.login == 'dependabot[bot]' && github.event.review.state == 'approved' }}
     steps:
       - run: gh pr comment --body "@dependabot merge" "$PR_URL"
