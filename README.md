@@ -2,7 +2,6 @@
 
 ![Chrome Web Store](https://img.shields.io/chrome-web-store/v/nokopdeekeebamcndeoakihbgenjmbll?style=plastic)
 ![GitHub](https://img.shields.io/github/license/ega4432/tweet-current-page?style=plastic)
-[![ci](https://github.com/ega4432/tweet-current-page/actions/workflows/ci.yaml/badge.svg)](https://github.com/ega4432/tweet-current-page/actions/workflows/ci.yaml)
 [![release](https://github.com/ega4432/tweet-current-page/actions/workflows/release.yaml/badge.svg)](https://github.com/ega4432/tweet-current-page/actions/workflows/release.yaml)
 
 ## 概要
