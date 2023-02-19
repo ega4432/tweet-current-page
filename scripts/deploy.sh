@@ -11,7 +11,7 @@ fi
 
 if [ ! -e extension.zip ]; then
     echo "Zipped file is not found."
-    echo "Execute: ./bin/build.sh"
+    echo "Execute: ./scripts/build.sh"
     exit 1
 fi
 
