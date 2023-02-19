@@ -2,7 +2,6 @@
 
 ![Chrome Web Store](https://img.shields.io/chrome-web-store/v/nokopdeekeebamcndeoakihbgenjmbll?style=plastic)
 ![GitHub](https://img.shields.io/github/license/ega4432/tweet-current-page?style=plastic)
-[![ci](https://github.com/ega4432/tweet-current-page/actions/workflows/ci.yaml/badge.svg)](https://github.com/ega4432/tweet-current-page/actions/workflows/ci.yaml)
 [![release](https://github.com/ega4432/tweet-current-page/actions/workflows/release.yaml/badge.svg)](https://github.com/ega4432/tweet-current-page/actions/workflows/release.yaml)
 
 ## 概要
@@ -51,7 +50,7 @@ GitHub Actions のワークフローをローカルでデバッグしたい場�
 ```shell
 $ brew install act
 
-$ ./bin/act.sh
+$ ./scripts/act.sh
 ```
 
 ### マニュアルデプロイ
@@ -62,7 +61,7 @@ $ ./bin/act.sh
 # 生成した秘匿情報をペーストします
 $ cp .env.example .env
 
-$ ./bin/deploy.sh
+$ ./scripts/deploy.sh
 ```
 
 [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole) を確認して、デプロイが完了したかを確認します。
