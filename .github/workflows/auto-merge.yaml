@@ -1,9 +1,8 @@
 name: auto-merge
 on:
   pull_request:
-  pull_request_review:
     types:
-      - submitted
+      - opened
 
 jobs:
   auto-merge:
