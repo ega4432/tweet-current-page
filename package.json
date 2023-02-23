@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@types/chrome": "^0.0.217",
-    "@types/copy-webpack-plugin": "^8.0.1",
+    "@types/copy-webpack-plugin": "^10.1.0",
     "@types/jest": "^28.1.7",
     "@types/node": "^18.11.9",
     "@types/webpack": "^5.28.0",
