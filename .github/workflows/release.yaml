@@ -26,19 +26,7 @@ jobs:
         with:
           node-version-file: .node-version
           cache: "yarn"
-
-      # example: https://github.com/actions/cache/blob/main/examples.md#node---yarn
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - name: Cache dependencies
-        uses: actions/cache@v3 # https://github.com/actions/cache
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
+          cache-dependency-path: yarn.lock
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
@@ -62,7 +50,7 @@ jobs:
             exit 1
           fi
 
-          echo ::set-output name=VERSION::$VERSION
+          echo "VERSION=${VERSION}" >> $GITHUB_OUTPUT
 
       - name: Update manifest.json
         shell: bash
